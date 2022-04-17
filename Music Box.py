@@ -12,8 +12,8 @@ def playSong():
     musica = "../musicas/" + lista[cont]
     pygame.init()
     pygame.mixer.music.load(musica)
-    pygame.mixer.music.play()
-    pygame.event.wait()
+    pygame.mixer.music.play(-1)
+    
 def pauseSong():
     pygame.mixer.music.pause()
 
@@ -21,12 +21,16 @@ def unpauseSong():
     pygame.mixer.music.unpause()
 def nextSong():
     global cont
+    if (cont>0):
+        pygame.mixer.music.stop()
     cont += 1
     if (cont >= len(lista) - 1):
         cont = len(lista) - 1
     playSong()
 def backSong():
     global cont
+    if (cont > 0):
+        pygame.mixer.music.stop()
     cont = cont - 1
     playSong()
     if (cont < 0):
